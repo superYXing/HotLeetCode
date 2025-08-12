@@ -1,0 +1,98 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "pascalTriangle",
+            "request": "launch",
+            "mainClass": "heima.pascalTriangle",
+            "projectName": "java_project_3359d72e"
+        },
+        {
+            "type": "java",
+            "name": "HanoiTower",
+            "request": "launch",
+            "mainClass": "heima.HanoiTower",
+            "projectName": "java_project_3359d72e"
+        },
+        {
+            "type": "java",
+            "name": "Recursion",
+            "request": "launch",
+            "mainClass": "heima.Recursion",
+            "projectName": "java_project_3359d72e"
+        },
+        {
+            "type": "java",
+            "name": "DoubleLinkedListSentinel",
+            "request": "launch",
+            "mainClass": "heima.DoubleLinkedListSentinel",
+            "projectName": "java_project_3359d72e"
+        },
+        {
+            "type": "java",
+            "name": "SinglyLinkedListSentinel",
+            "request": "launch",
+            "mainClass": "heima.SinglyLinkedListSentinel",
+            "projectName": "java_project_3359d72e"
+        },
+        {
+            "type": "java",
+            "name": "SinglyLinkedList",
+            "request": "launch",
+            "mainClass": "heima.SinglyLinkedList",
+            "projectName": "java_project_3359d72e"
+        },
+        {
+            "type": "java",
+            "name": "test_maxSubArray",
+            "request": "launch",
+            "mainClass": "heima.test_maxSubArray",
+            "projectName": "java_project_3359d72e"
+        },
+        {
+            "type": "java",
+            "name": "DynamicArr",
+            "request": "launch",
+            "mainClass": "heima.DynamicArr",
+            "projectName": "java_project_3359d72e"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "binarySearch",
+            "request": "launch",
+            "mainClass": "heima.binarySearch",
+            "projectName": "java_project_3359d72e"
+        },
+        {
+            "type": "java",
+            "name": "insertArr",
+            "request": "launch",
+            "mainClass": "heima.insertArr",
+            "projectName": "java_project_3359d72e"
+        },
+        {
+            "type": "java",
+            "name": "Car",
+            "request": "launch",
+            "mainClass": "java_exercise.Car",
+            "projectName": "java_project_3359d72e"
+        },
+        {
+            "type": "java",
+            "name": "Exercise1",
+            "request": "launch",
+            "mainClass": "java_exercise.Exercise1",
+            "projectName": "java_project_3359d72e"
+        }
+    ]
+}
