@@ -21,24 +21,29 @@ import java.util.Arrays;
  */
 class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        ArrayList<Integer> arr = new ArrayList<>();
-        int i = 0;
-        while(head!=null){
-            arr.add(head.val);
-            head=head.next;
-        }
-        int tar = arr.size() - n;
-        arr.remove(tar);
-                if(arr.isEmpty()) return null;
-        System.out.println(arr.toString());
-        //新建链表返回
-        ListNode newHead = new ListNode(arr.get(0));
-        ListNode curr = newHead;
-        for(i=1;i<arr.size();i++){
-          curr.next=new ListNode(arr.get(i));
-          curr = curr.next;
-        }
-        return newHead;
+       ListNode s = new ListNode(-1,head);
+       ListNode prev = s;
+       ListNode curr = s;
+       int len =0;
+       //计算链表长度（包括头节点）
+       while(curr!=null){
+        len++;
+         // System.out.println("value:: "+s.val);
+        curr=curr.next;
+       
+       }
+      
+      //   System.out.println("length(): "+len);
+       //计算删除的正序位置(从0计算)
+       int pos = len-n;
+    //    ListNode curr = s;
+       //开始删除
+       for(int i=0;i<pos-1&&prev!=null;i++){
+        prev=prev.next;
+       }
+      //   System.out.println("prev.value(): "+prev.val);
+       prev.next=prev.next.next;
+       return s.next;
     }
 }
 // @lc code=end
