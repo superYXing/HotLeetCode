@@ -15,6 +15,8 @@ public class LinkedListQueue<E> implements Queue<E> {
 
     private Node<E> head = new Node<>(null,null);
     private Node<E> tail = head;
+    private int capacity =  10;
+    private int size = 0;
 
     public LinkedListQueue(){
         tail.next = head;
@@ -28,10 +30,14 @@ public class LinkedListQueue<E> implements Queue<E> {
 
     @Override
     public boolean offer(E value) {
+        if(!isFull()){
         Node<E> n = new Node<E>(value, head);
         tail.next = n;
         tail = n;
+        size++;
         return true;
+        }else 
+        return false;
     }
 
     @Override
@@ -47,9 +53,15 @@ public class LinkedListQueue<E> implements Queue<E> {
         if(head.next==tail) tail = head;
         E value = head.next.value;
         head.next = head.next.next;
+        size--;
         // head = head.next;
        
         return value;
+    }
+
+    public boolean isFull(){
+        if(size==capacity) return true;
+        return false;
     }
     
 
