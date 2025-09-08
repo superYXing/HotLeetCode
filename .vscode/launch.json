@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "InfixToSuffix",
+            "request": "launch",
+            "mainClass": "heima.InfixToSuffix",
+            "projectName": "java_project_3359d72e"
+        },
+        {
+            "type": "java",
+            "name": "testMain",
+            "request": "launch",
+            "mainClass": "heima.testMain",
+            "projectName": "java_project_3359d72e"
+        },
+        {
+            "type": "java",
             "name": "pascalTriangle",
             "request": "launch",
             "mainClass": "heima.pascalTriangle",
