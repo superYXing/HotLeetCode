@@ -79,22 +79,37 @@ public class MaxHeap {
         }
 
         public void up(int offered,int child){
-           
+           array[child] = offered;
             while(child>0){
                  int parent = (child-1) / 2; 
-                if(array[parent]<array[child]){
+                if(array[parent]<offered){
                     swap(parent, child);
                     child=parent;
                 }else{
                     break;
                 }
             }
-            array[child] = offered;
+          
         }
         //替换堆顶元素
         public void replace(int num){
             array[0] = num;
             down(0);
         }
-        //优化：提取出down，up，swap三个函数并应用
+        public static void main(String[] args) {
+            MaxHeap maxheap = new MaxHeap(5);
+            //插入5个元素
+            for(int i =0;i<5;i++) maxheap.offer(i);
+            //堆化
+            maxheap.heapify();
+            //每次都把最底层元素放到根节点再下潜
+            while(maxheap.size>1){
+            maxheap.swap(--maxheap.size, 0);
+            maxheap.down(0);
+            }
+            //输出结果
+            for(int i = 0 ; i<maxheap.array.length;i++)
+            System.out.println(maxheap.array[i]);
+        }
 }
+    
