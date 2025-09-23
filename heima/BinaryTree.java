@@ -66,8 +66,66 @@ public class BinaryTree {
         LastOrder(node.right);
         System.out.println(node.value);
     }
+/*
+ * 非递归前序遍历
+ */
+    public void PreOrderWithNoRecursion(TreeNode node){
+        LinkedList<TreeNode> stack = new LinkedList<>();
+        TreeNode curr = node;
+        
+        while( curr!=null || !stack.isEmpty()){
+            if(curr!=null){
+                stack.push(curr);
+                System.out.println("去："+curr.value);
+                curr = curr.left;
+            }else{
+                curr = stack.pop();
+                curr = curr.right;
+            }
+        } 
+    }
+
+    public void MidOrderWithNoRecursion(TreeNode node){
+        LinkedList<TreeNode> stack = new LinkedList<>();
+        TreeNode curr = node;
+        
+        while( curr!=null || !stack.isEmpty()){
+            if(curr!=null){
+                stack.push(curr);
+                curr = curr.left;
+            }else{
+                curr = stack.pop();
+                System.out.println("中序："+curr.value);
+                curr = curr.right;
+            }
+        } 
+    }
+    public void LastOrderWithNoRecursion(TreeNode node){
+        LinkedList<TreeNode> stack = new LinkedList<>();
+        TreeNode curr = node;
+        TreeNode pop = null;
+        while( curr!=null || !stack.isEmpty()){
+            if(curr!=null){
+                stack.push(curr);
+                curr = curr.left;
+            }else{
+                TreeNode peek = stack.peek();
+                if(peek.right==null || peek.right == pop){
+                    pop = stack.pop();
+                    System.out.println("后续："+pop.value);
+                }else{
+                    curr = peek.right;
+                }
+                
+                
+                
+            }
+        } 
+    }
+
     public static void main(String[] args) {
         BinaryTree tree = new BinaryTree();
-        tree.LastOrder(tree.node);
+        tree.PreOrderWithNoRecursion(tree.node);
+        
     }
 }
