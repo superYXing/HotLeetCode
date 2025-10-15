@@ -1,4 +1,8 @@
 package heima;
+
+import java.util.LinkedList;
+import java.util.Stack;
+
 public class BinarySearchTree {
     BSTNode root;
     static class BSTNode{
@@ -61,28 +65,119 @@ public class BinarySearchTree {
     return;
     }
     public Object min(){
-        if(root == null) return null;
-        BSTNode node = root;
-        while(node.left!=null){
-            node = node.left;
-        }
-        return node.value;
+        return doMin(root);
     }
-
+    private Object doMin(BSTNode n){
+         BSTNode node = n;
+                if(node==null) return null;
+               
+                while(node.left!=null){
+                    node = node.left;
+                }
+                return node.value; 
+    }
     public Object max(){
-        if(root == null) return null;
-        BSTNode node = root;
-        while(node.right!=null){
-            node = node.right;
-        }
-        return node.value;
+        return doMax(root);
     }
+    private Object doMax(BSTNode n){ 
+        BSTNode node = n;
+                if(node==null) return null;
+               
+                while(node.right!=null){
+                    node = node.right;
+                }
+                return node.value; 
+            }  
     public BinarySearchTree(){
         root = new BSTNode(4,4,new BSTNode(2,2,new BSTNode(1,1,null,null),new BSTNode(3,3,null,null
-        )),new BSTNode(7,56,new BSTNode(6,6,new BSTNode(5,5,null,null),null),new BSTNode(8,8,null,null)));
+        )),new BSTNode(7,7,new BSTNode(6,6,new BSTNode(5,5,null,null),null),new BSTNode(8,8,null,null)));
     }
 
+    public Object predecessor(int key){
+        BSTNode node = root;
+        BSTNode predecNode = new BSTNode();
+        while(node!=null){
+            if(node.key>key) node = node.left;
+            else if(node.key<key){
+                predecNode = node;
+                node = node.right;
+            } 
+            else break;
+        }
+        
+        if(node==null) return null;
+        else{
+            if(node.left!=null){
+                //找左子树的最大值
+                BSTNode temp = node.left;
+                int val = (int)doMax(temp);
+                return val;              
+            }else{
+                return predecNode==null?null:predecNode.value;
+            }
+        }
+    }
 
+    public Object successor(int key){
+        BSTNode node =root;
+        BSTNode sucNode = new BSTNode();
+        while(node!=null){
+            if(node.key>key){
+                sucNode = node;
+                node = node.left;
+                
+            }else if(node.key<key){
+                node = node.right;
+            }else{
+                break;
+            }
+        }
+        if(node==null) return null;
+        else{
+            if(node.right!=null){
+                int val = (int)doMin(node.right);
+                return val;
+            }else{
+                return sucNode==null?null:sucNode.value;
+            }
+        }
+    }
+
+    public Object delete(int key){
+        BSTNode node = root;
+        BSTNode parent = new BSTNode();
+        while(node!=null){
+            if(node.key>key){
+                parent = node;
+                node = node.left;
+            }else if(node.key<key){
+                parent = node.right;
+                node = node.right;
+            }else break;
+            } 
+        if(node==null) return null;
+        else{
+        if(node.left==null&&node.right!=null){
+            shift(node,parent,node.right);
+        }else if(node.right == null&&node.left!=null){
+            shift(node,parent,node.left);
+        }else{
+
+        }
+    }
+}
+        private void shift(BSTNode deleted, BSTNode parent, BSTNode child){
+            if(parent==null) root = parent;
+            else{
+                if(parent.left==deleted){
+                    //托孤在左子树
+                    parent.left=child;
+                }else if(parent.right==deleted){
+                    //托孤在右子树
+                    parent.right = child;
+                }
+            }
+        }
     public static void main(String[] args) {
         BinarySearchTree root = new BinarySearchTree();
 //         Object val = root.get(72);
@@ -94,8 +189,9 @@ public class BinarySearchTree {
 // else if (val instanceof Integer) {
 //     System.out.println(val);
 // }
-    root.put(4, 100);
-    int val = (int)root.get(4);
-    System.out.println(val);
+    Object res = root.successor(8);
+    if(res instanceof Integer)
+   System.out.println(res);
+   else{System.out.println("null");}
     }
 }
