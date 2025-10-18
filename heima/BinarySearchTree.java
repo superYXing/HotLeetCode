@@ -1,6 +1,7 @@
 package heima;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Stack;
 
 public class BinarySearchTree {
@@ -157,14 +158,33 @@ public class BinarySearchTree {
             } 
         if(node==null) return null;
         else{
-        if(node.left==null&&node.right!=null){
+        if(node.left == null){
             shift(node,parent,node.right);
-        }else if(node.right == null&&node.left!=null){
+        }else if(node.right == null){
             shift(node,parent,node.left);
         }else{
+			//后继结点
+			BSTNode s = node;
+			//后继结点的父亲
+			BSTNode sparent = null;
+			// 先找待删除结点node的后继s以及sparent
+			while(s.left!=null){
+				sparent = s;
+				s=s.left;
+			}
+			//判断待删除结点和后继结点是否相邻
+			if(sparent!=node){
+				//如果不相邻，则处理后继结点的后事
+				shift(sparent, s, s.right);
+				s.right = node.right;
+			}
 
+			//最后统一删除目标结点
+			shift(parent, node, s);
+			s.left = node.left;
         }
     }
+	return node.value;
 }
         private void shift(BSTNode deleted, BSTNode parent, BSTNode child){
             if(parent==null) root = parent;
@@ -178,6 +198,25 @@ public class BinarySearchTree {
                 }
             }
         }
+
+		public List<Object> less(int key){
+			BSTNode curr = root;
+			Stack<BSTNode> stack = new Stack<>();
+			LinkedList<Object> res = new LinkedList<>();
+			while(curr!=null||!stack.isEmpty()){
+				if(curr!=null){
+					stack.push(curr);
+					curr = curr.left;
+				}else{
+					BSTNode n = stack.pop();
+					if(key>n.key){
+						res.add(n.key);
+					}
+					curr = n.right;
+				}
+			}
+			return res;
+		}
     public static void main(String[] args) {
         BinarySearchTree root = new BinarySearchTree();
 //         Object val = root.get(72);
@@ -189,9 +228,12 @@ public class BinarySearchTree {
 // else if (val instanceof Integer) {
 //     System.out.println(val);
 // }
-    Object res = root.successor(8);
-    if(res instanceof Integer)
-   System.out.println(res);
-   else{System.out.println("null");}
+//     Object res = root.successor(8);
+//     if(res instanceof Integer)
+//    System.out.println(res);
+//    else{System.out.println("null");}
+List<Object> list = new LinkedList<>();
+list = root.less(6);
+System.out.println(list.toString());
     }
 }

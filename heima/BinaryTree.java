@@ -2,6 +2,7 @@ package heima;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class BinaryTree {
     public class TreeNode{
@@ -115,17 +116,13 @@ public class BinaryTree {
                     System.out.println("后续："+pop.value);
                 }else{
                     curr = peek.right;
-                }
-                
-                
-                
+                }   
             }
         } 
     }
 
     public static void main(String[] args) {
         BinaryTree tree = new BinaryTree();
-        tree.PreOrderWithNoRecursion(tree.node);
-        
+         tree.LastOrderWithNoRecursion(tree.node);
     }
 }
