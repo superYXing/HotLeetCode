@@ -110,6 +110,24 @@ public class HashTable {
 		table = newTable;
 		threshold = (int)(loadFactor * table.length);
 	}
+
+	public Object get(Object key){
+		int hash = hash(key);
+		return get(hash, key);
+	}
+
+	public Object delete(Object key){
+		int hash = hash(key);
+		return delete(hash,key);
+	}
+
+	public void put(Object key, Object value){
+		int hash = hash(key);
+		put(hash,key,value);
+	}
+	private int hash(Object key){
+		return key.hashCode();
+	}
 	public static void main(String[] args) {
         HashTable ht = new HashTable();
 
