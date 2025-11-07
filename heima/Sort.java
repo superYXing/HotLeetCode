@@ -77,6 +77,35 @@ public class Sort {
 		return arr;
 	}
 
+	static int[] insertionSort(int[] arr){
+		for(int i=1;i<arr.length;i++){
+			if(arr[i]<arr[i-1]){  //从小到大排序，如果后值比前值小，才交换
+				int temp=arr[i];
+				int j;
+				for(j=i-1;j>=0&&arr[j]>temp;j--){
+					arr[j+1] = arr[j];
+				}
+				arr[j+1] = temp;
+			}
+		}
+		return arr;
+	}
+
+	static int[] shellSort(int[] arr){
+		//间隔设成数组长度的一半
+		for(int gap=arr.length>>1;gap>=1;gap=gap>>1){
+		//insertionSort
+		for(int i=gap;i<arr.length;i++){
+			int temp = arr[i];
+			int j;
+			for(j=i-gap;j>=0&&arr[j]>temp;j=j-gap){
+				arr[j+gap] = arr[j];
+			}
+			arr[j+gap] = temp;
+		}
+	}
+		return arr;
+	}
 
 	static void toString(int[] arr){
 		for(int i = 0 ; i<arr.length ; i++){
@@ -85,8 +114,8 @@ public class Sort {
 	}
 
 	public static void main(String[] args) {
-		int[] arr = {7,8,3,6,9,4,2,5,1};
-		arr = heapSort(arr);
+		int[] arr = {50,40,30,20,10,45,35,25,15,5,48,38,28,18,8};
+		arr = shellSort(arr);
 		toString(arr);
 	}
 }
