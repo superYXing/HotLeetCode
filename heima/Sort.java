@@ -107,6 +107,38 @@ public class Sort {
 		return arr;
 	}
 
+	static int[] mergeSort(int[] arr){
+		split(arr,0,arr.length-1);
+		return arr;
+	}
+
+	static void split(int[] arr,int left, int right){
+		if(left==right) return;
+
+		//分
+		int mid = (left+right) >>> 1;
+		split(arr,left,mid);
+		split(arr, mid+1, right);
+
+		//合
+		merge(arr,left,mid,right);
+	}
+
+	static void merge(int[] arr, int left, int mid, int right){
+		int i=left,j=mid+1,num=0;
+		int temp[] = new int[right-left+1];
+		while(i<=mid&&j<=right){
+			temp[num++] = arr[i]<=arr[j]?arr[i++]:arr[j++];
+		}
+		if(i<=mid){
+			System.arraycopy(arr, i, temp, num, mid-i+1);
+		}else if(j<=right){
+			System.arraycopy(arr, j, temp, num, right-j+1);
+		}
+		//把temp赋值给nums1
+		System.arraycopy(temp,0,arr,left,right-left+1);
+	}
+
 	static void toString(int[] arr){
 		for(int i = 0 ; i<arr.length ; i++){
 			System.out.println(arr[i]);
@@ -115,7 +147,8 @@ public class Sort {
 
 	public static void main(String[] args) {
 		int[] arr = {50,40,30,20,10,45,35,25,15,5,48,38,28,18,8};
-		arr = shellSort(arr);
+		arr = mergeSort(arr);
 		toString(arr);
+		// System.arraycopy(args, 0, arr, 0, 0);
 	}
 }
