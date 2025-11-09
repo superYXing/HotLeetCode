@@ -139,6 +139,19 @@ public class Sort {
 		System.arraycopy(temp,0,arr,left,right-left+1);
 	}
 
+	static int[] mergeBottomUp(int[] arr){
+		int n = arr.length;
+
+		for(int width=1;width<n;width*=2){
+			for(int left=0;left<n;left+=2*width){
+ 				int right = Math.min(left+2*width-1, n-1);
+				System.out.printf("width: %d,[%d,%d]%n", width, left, right);
+				int mid = Math.min(left+width-1,n-1);
+				merge(arr, left, mid, right);
+			}
+		}
+		return arr;
+	}
 	static void toString(int[] arr){
 		for(int i = 0 ; i<arr.length ; i++){
 			System.out.println(arr[i]);
@@ -146,8 +159,8 @@ public class Sort {
 	}
 
 	public static void main(String[] args) {
-		int[] arr = {50,40,30,20,10,45,35,25,15,5,48,38,28,18,8};
-		arr = mergeSort(arr);
+		int[] arr = {50,40,30,20,10};
+		arr = mergeBottomUp(arr);
 		toString(arr);
 		// System.arraycopy(args, 0, arr, 0, 0);
 	}
