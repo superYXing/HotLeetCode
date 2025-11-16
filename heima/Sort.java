@@ -152,6 +152,43 @@ public class Sort {
 		}
 		return arr;
 	}
+
+	static int[] quickSort(int[] arr){
+		quick(arr,0,arr.length-1);
+		return arr;
+	}
+	static void quick(int[] arr, int left, int right){
+				// System.out.printf("[%d,%d]%n",left, right);
+		if(left>=right) return;
+		int p = partition(arr,left,right);
+
+		toString(arr);
+		quick(arr, left, p-1);
+		quick(arr, p+1, right);
+	}
+	static int partition(int[] arr, int left, int right){
+		int i = left;
+		int j = left;
+		int base = arr[right];
+		while(j<right){
+			if(arr[j]<base){
+				if(i!=j){
+				swap(arr,j,i);
+				}
+			i++;    //j永远在i的前面，j先到达right
+			}
+			j++;
+		}
+
+		swap(arr,i,right);
+		return i;
+	}
+
+	static void swap(int[] arr,int i, int j){
+		int tmp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = tmp;
+	}
 	static void toString(int[] arr){
 		for(int i = 0 ; i<arr.length ; i++){
 			System.out.println(arr[i]);
@@ -159,8 +196,8 @@ public class Sort {
 	}
 
 	public static void main(String[] args) {
-		int[] arr = {50,40,30,20,10};
-		arr = mergeBottomUp(arr);
+		int[] arr = {4,3,2,1,5,8,7,9};
+		arr = quickSort(arr);
 		toString(arr);
 		// System.arraycopy(args, 0, arr, 0, 0);
 	}
