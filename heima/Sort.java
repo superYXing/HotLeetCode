@@ -152,21 +152,28 @@ public class Sort {
 		}
 		return arr;
 	}
+static class QuickSort{
 
-	static int[] quickSort(int[] arr){
-		quick(arr,0,arr.length-1);
+
+	static int[] quickSort_LOMUTO(int[] arr){
+		quick_LOMUTO(arr,0,arr.length-1);
 		return arr;
 	}
-	static void quick(int[] arr, int left, int right){
+
+	public int[] quickSort_doubleside(int[] arr){
+		quick_doubleside(arr,0,arr.length-1);
+		return arr;
+	}
+	static void quick_LOMUTO(int[] arr, int left, int right){
 				// System.out.printf("[%d,%d]%n",left, right);
 		if(left>=right) return;
-		int p = partition(arr,left,right);
+		int p = partition_LOMUTO(arr,left,right);
 
-		toString(arr);
-		quick(arr, left, p-1);
-		quick(arr, p+1, right);
+		// toString(arr);
+		quick_LOMUTO(arr, left, p-1);
+		quick_LOMUTO(arr, p+1, right);
 	}
-	static int partition(int[] arr, int left, int right){
+	static int partition_LOMUTO(int[] arr, int left, int right){
 		int i = left;
 		int j = left;
 		int base = arr[right];
@@ -183,12 +190,43 @@ public class Sort {
 		swap(arr,i,right);
 		return i;
 	}
+	public void quick_doubleside(int[] arr, int left, int right){
+				// System.out.printf("[%d,%d]%n",left, right);
+		if(left>=right) return;
+		int p = partition_doubleside(arr,left,right);
 
+		// toString(arr);
+		quick_doubleside(arr, left, p-1);
+		quick_doubleside(arr, p+1, right);
+	}
+	public int partition_doubleside(int[] arr, int left, int right){
+		int i=left;
+		int j = right;
+
+		// 随机选择基准点,并与最左侧元素交换
+		int randomIndex = left + (int) (Math.random() * (right - left + 1));
+		swap(arr, left, randomIndex);
+
+		int base = arr[left];
+		while(i!=j){
+			if(arr[j]<base&&arr[i]>base){
+				swap(arr, i, j);
+			}else if(arr[j]>=base){
+				j--;
+			}else if(arr[i]<=base){
+				i++;
+			}
+		}
+		swap(arr, i, left);
+		return i;
+	}
 	static void swap(int[] arr,int i, int j){
 		int tmp = arr[i];
 		arr[i] = arr[j];
 		arr[j] = tmp;
 	}
+
+}
 	static void toString(int[] arr){
 		for(int i = 0 ; i<arr.length ; i++){
 			System.out.println(arr[i]);
@@ -196,9 +234,12 @@ public class Sort {
 	}
 
 	public static void main(String[] args) {
-		int[] arr = {4,3,2,1,5,8,7,9};
-		arr = quickSort(arr);
-		toString(arr);
+		int[] arr = {4,3,2,1,5,8,7,9,15,63,45,12,898,4};
+		// arr = quickSort(arr);
+		// toString(arr);
 		// System.arraycopy(args, 0, arr, 0, 0);
+		QuickSort quicksort = new QuickSort();
+		arr = quicksort.quickSort_doubleside(arr);
+		toString(arr);
 	}
 }
