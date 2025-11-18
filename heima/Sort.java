@@ -227,6 +227,28 @@ static class QuickSort{
 	}
 
 }
+	static int[] countSort(int[] arr){
+		int max = arr[0];
+		//改进：支持负数的情况:将最小值映射到索引0
+		int min = arr[0];
+		for(int i=0;i<arr.length;i++){
+			max = arr[i]>max?arr[i]:max;
+			min = arr[i]<min?arr[i]:min;
+		}
+		//使用偏移量来记录tmp数组
+		int[] tmp = new int[max+1-min];  //min为负数
+		for(int i=0;i<arr.length;i++){
+			tmp[arr[i]-min]++;   //根据偏移量，找到对应索引
+		}
+		int idx = 0;
+		for(int i=0;i<tmp.length;i++){
+			int count = tmp[i];
+			while(count-->0){
+				arr[idx++] =  i+min; //偏移量为min
+			}
+		}
+		return arr;
+	}
 	static void toString(int[] arr){
 		for(int i = 0 ; i<arr.length ; i++){
 			System.out.println(arr[i]);
@@ -234,12 +256,11 @@ static class QuickSort{
 	}
 
 	public static void main(String[] args) {
-		int[] arr = {4,3,2,1,5,8,7,9,15,63,45,12,898,4};
-		// arr = quickSort(arr);
-		// toString(arr);
-		// System.arraycopy(args, 0, arr, 0, 0);
-		QuickSort quicksort = new QuickSort();
-		arr = quicksort.quickSort_doubleside(arr);
+		int[] arr = {4,3,2,1,5,8,7,9,12,4,-2,-3};
+		arr = countSort(arr);
 		toString(arr);
+		// QuickSort quicksort = new QuickSort();
+		// arr = quicksort.quickSort_doubleside(arr);
+		// toString(arr);
 	}
 }
