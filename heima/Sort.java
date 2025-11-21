@@ -249,6 +249,51 @@ static class QuickSort{
 		}
 		return arr;
 	}
+	 static int[] bucketSort(int[] arr){
+
+		//改进：基于计数的桶排序，根据数组最大最小元素之差来建桶
+		//使用计数排序的找到最小和最大值的方法
+
+		int max = arr[0];
+		int min = arr[0];
+		for(int i=0;i<arr.length;i++){
+			max = arr[i]>max?arr[i]:max;
+			min = arr[i]<min?arr[i]:min;
+		}
+		int count = max-min+1;
+		//改进：让每个桶有range个元素，从而减少数组的创建操作
+		int range = 3;
+		ArrayList<Integer>[] buckets = new ArrayList[(count-1)/range+1]; //桶的大小基于数组元素设立
+		for(int i=0;i<buckets.length;i++){
+			buckets[i] = new ArrayList<Integer>();
+		}
+		for(int num:arr){
+			buckets[(num-min)/range].addLast(num); //基于偏移量，在正确的桶位置添加
+		}
+		int k=0;
+    // 对每个桶进行排序
+    for(int i=0;i<buckets.length;i++){
+				//输出每个桶
+				System.out.println(buckets[i].toString());
+				
+		
+        int[] temp = buckets[i].stream().mapToInt(Integer::intValue).toArray();
+
+        insertionSort(temp);
+        
+        // 将排序后的结果写回 ArrayList
+        buckets[i].clear();
+        for(int num : temp){
+            buckets[i].add(num);
+        }
+			//复原到原数组
+		for(int v:buckets[i]){
+			arr[k++] =v;
+		}
+    }
+
+ 		return arr;
+	 }
 	static void toString(int[] arr){
 		for(int i = 0 ; i<arr.length ; i++){
 			System.out.println(arr[i]);
@@ -257,7 +302,7 @@ static class QuickSort{
 
 	public static void main(String[] args) {
 		int[] arr = {4,3,2,1,5,8,7,9,12,4,-2,-3};
-		arr = countSort(arr);
+		arr = bucketSort(arr);
 		toString(arr);
 		// QuickSort quicksort = new QuickSort();
 		// arr = quicksort.quickSort_doubleside(arr);
