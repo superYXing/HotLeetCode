@@ -5,7 +5,7 @@ public class Vertex {
 	String name;
 	List<Edge> edges;
 	boolean visited = false;
-
+	int inDegree; //入度
 	public Vertex(String name) {
 		this.name = name;
 	}

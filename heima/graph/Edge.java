@@ -8,6 +8,7 @@ public class Edge {
 	public Edge(Vertex linked) {
 		this.linked = linked;
 		this.weight = 1;
+		linked.inDegree++;
 	}
 
 
