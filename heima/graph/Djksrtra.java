@@ -30,12 +30,12 @@ public class Djksrtra {
 		
 		for(Vertex vertex:graph){
 		
-			System.out.println(vertex.name + " : " + vertex.dist);
+			System.out.println(vertex.name + " : " + vertex.dist + " name: " + (vertex.prev!=null?vertex.prev.name:"null"));
 		}
 	}
 	
 	static void dijkstra(List<Vertex> graph, Vertex source) {
-		System.out.println("into");
+		// System.out.println("into");
 		List<Vertex> list = new ArrayList<>(graph);
 		source.dist=0;
 		while(!list.isEmpty()){
@@ -44,7 +44,10 @@ public class Djksrtra {
 			//更新距离
 			for(Edge edge:v.edges){
 				if(list.contains(edge.linked)){
-				edge.linked.dist = edge.linked.dist<edge.weight+v.dist?edge.linked.dist:edge.weight+v.dist;
+					if(edge.linked.dist>edge.weight+v.dist){
+						edge.linked.dist = edge.weight+v.dist;
+						edge.linked.prev = v;
+					}
 			}
 		}
 			//从列表删除顶点

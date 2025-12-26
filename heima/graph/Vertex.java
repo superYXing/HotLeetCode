@@ -8,6 +8,7 @@ public class Vertex {
 	int inDegree; //入度
 	int status; //0为未访问，1为访问中，2为已访问，用于拓扑排序
 	int dist = Integer.MAX_VALUE;  //Djkstra算法的初始距离
+	Vertex prev = null;
 	public Vertex(String name) {
 		this.name = name;
 	}

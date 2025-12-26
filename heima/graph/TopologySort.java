@@ -8,13 +8,13 @@ import javax.print.DocFlavor.STRING;
 import heima.graph.*;
 public class TopologySort {
 	public static void main(String[] args) throws Exception {
-		Vertex v1 = new Vertex("网页基础");
-	Vertex v2 = new Vertex(  "Java基础");
-	Vertex v3 = new Vertex( "JavaWeb");
-	Vertex v4 = new Vertex(  "Spring框架");
-	Vertex v5 = new Vertex( "微服务框架");
-	Vertex v6 = new Vertex(  "数据库");
-	Vertex v7 = new Vertex(  "实战项目");
+		Vertex v1 = new Vertex("1");
+	Vertex v2 = new Vertex(  "2");
+	Vertex v3 = new Vertex( "3");
+	Vertex v4 = new Vertex(  "4");
+	Vertex v5 = new Vertex( "5");
+	Vertex v6 = new Vertex(  "6");
+	Vertex v7 = new Vertex(  "7");
 
 	v1.edges = List.of(new Edge(v3));
 	v2.edges = List.of(new Edge(v3));
@@ -25,16 +25,19 @@ public class TopologySort {
 	v7.edges = List.of();
 
 	List<Vertex> graph = new ArrayList<>(List.of(v1, v2, v3, v4, v5, v6, v7));
-	// topologySort(graph);
-	LinkedList<String> stack = new LinkedList<>();
-	for(Vertex vertex:graph){
-		dfsTopology(vertex, stack);
-	}
-	System.out.println(stack);
+		//入度在Edge构造类自动更新
+	topologySort(graph);
+	// LinkedList<String> stack = new LinkedList<>();
+	// for(Vertex vertex:graph){
+	// 	dfsTopology(vertex, stack);
+	// }
+	// System.out.println(stack);
 	}
 	static void topologySort(List<Vertex> graph){
 		LinkedList<Vertex> queue = new LinkedList<>();
+
 		for(Vertex vertex:graph){
+			System.out.println(vertex.name+" "+vertex.inDegree);
 			if(vertex.inDegree==0){
 				queue.add(vertex);
 			}
